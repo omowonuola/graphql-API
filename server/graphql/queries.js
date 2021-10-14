@@ -1,10 +1,18 @@
-// Import required info from graphql
+import {GraphQLList} from 'graphql'
+import User from '../models/User.js'
 
-import {GraphQLSchema} from 'graphql'
+import { UserType } from './types.js'
+// import {} from './queries'
 
 
-// import queries
-import {} from './queries'
+const users = {
+    type: new GraphQLList(UserType),
+    resolve(parent, args) {
+        return User.find()
+    }
+}
 
-// import mutations
+export {
+    users
+}
 
