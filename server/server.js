@@ -1,7 +1,10 @@
 import express from 'express'
 import colors from 'colors'
 import dotenv from 'dotenv'
-import connectDB from './db'
+import userRoutes from './routes/userRoutes.js'
+import cors from 'cors';
+import {notFound, errorHandler} from './middleware/errorMiddleware.js'
+import connectDB from './db/index.js'
 import { graphqlHTTP } from 'express-graphql'
 import schema from './graphql/schema.js'
 
@@ -10,22 +13,24 @@ dotenv.config()
 connectDB()
 
 const app = express()
-app.use(express.json())
+app.use(cors());
+app.use(express.urlencoded({limit: '50mb', extended: true }));
+app.use(express.json({limit: '50mb'}));
 
 app.get("/", (req, res) => {
     res.json({ msg: "Welcome! Go to /graphql" })
 })
 
+// app.use(notFound)
+app.use(errorHandler)
+
 app.use(
     "/graphql",
     graphqlHTTP({
         schema: schema,
-        graphql: true,
+        graphiql: true,
     })
 )
-
-
-
 
 
 

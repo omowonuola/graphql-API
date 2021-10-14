@@ -4,18 +4,18 @@ import {defaultTypeResolver, GraphQLObjectType, GraphQLSchema} from 'graphql'
 
 
 // import queries
-import {} from './queries.js'
+import { users } from './queries.js'
 
 // import mutations
 
-import {} from './mutation.js'
+import { register, login} from './mutation.js'
 
 // define QueryType
 
 const QueryType = new GraphQLObjectType({
     name: "QueryType",
     description: "Queries",
-    fields: {},
+    fields: { users },
 })
 
 
@@ -24,7 +24,7 @@ const QueryType = new GraphQLObjectType({
 const MutationType = new GraphQLObjectType({
     name: "MutationType",
     description: "Mutations",
-    fields: {},
+    fields: { register, login },
 })
 
 const modules =  new GraphQLSchema({

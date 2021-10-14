@@ -1,5 +1,7 @@
 import { GraphQLObjectType, GraphQLID, GraphQLString } from 'graphql'
-import { User, Post, Comment } from '../models.js'
+import User from '../models/User.js'
+import Post from '../models/Post.js'
+import Comment from '../models/Comment.js'
 
 
 const UserType = new GraphQLObjectType({
@@ -7,7 +9,7 @@ const UserType = new GraphQLObjectType({
     description: "User type",
     fields: () => ({
         id: { type: GraphQLID },
-        username: { type: GraphQLString },
+        userName: { type: GraphQLString },
         email: { type: GraphQLString },
         displayName: { type: GraphQLString },
     }),
